@@ -3,7 +3,7 @@ module Gem
     def activate_gem(gem_name, *version_requirements)
       if sk = ENV['GEM_SKIP']
         if sk.split(/:/).include? gem_name
-          raise Gem::LoadError, "skipping #{gem_name}" if skip_list.include? gem_name
+          raise Gem::LoadError, "skipping #{gem_name}"
         end
       end
 
