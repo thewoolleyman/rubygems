@@ -91,7 +91,7 @@ class Gem::SourceIndex
 
   def initialize(specifications={})
     @gems = {}
-    specifications.each{ |full_name, spec| add_spec spec }
+    specifications.each { |full_name, spec| add_spec spec }
     @spec_dirs = nil
   end
 
@@ -101,11 +101,11 @@ class Gem::SourceIndex
   end
 
   def prerelease_gems
-    @gems.reject{ |name, gem| !gem.version.prerelease? }
+    @gems.reject { |name, gem| !gem.version.prerelease? }
   end
 
   def released_gems
-    @gems.reject{ |name, gem| gem.version.prerelease? }
+    @gems.reject { |name, gem| gem.version.prerelease? }
   end
 
   ##
