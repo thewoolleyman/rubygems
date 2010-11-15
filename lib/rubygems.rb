@@ -900,6 +900,14 @@ module Gem
   end
 
   ##
+  # Sets the source index that rest of the system uses by default
+  #
+
+  def self.source_index=(si)
+    @@source_index = si
+  end
+
+  ##
   # Returns an Array of sources to fetch remote gems from.  If the sources
   # list is empty, attempts to load the "sources" gem, then uses
   # default_sources if it is not installed.

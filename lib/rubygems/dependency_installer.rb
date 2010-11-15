@@ -44,7 +44,9 @@ class Gem::DependencyInstaller
   # :wrappers:: See Gem::Installer::new
 
   def initialize(options = {})
-    if options[:install_dir] then
+    if si = options[:source_index]
+      @source_index = si
+    elsif options[:install_dir]
       spec_dir = options[:install_dir], 'specifications'
       @source_index = Gem::SourceIndex.from_gems_in spec_dir
     else
