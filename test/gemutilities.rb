@@ -36,10 +36,6 @@ module Gem
     @searcher = searcher
   end
 
-  def self.source_index=(si)
-    @@source_index = si
-  end
-
   def self.win_platform=(val)
     @@win_platform = val
   end

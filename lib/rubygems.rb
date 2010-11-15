@@ -1045,6 +1045,22 @@ module Gem
     load_plugin_files files
   end
 
+  ##
+  # Return the object to use for Kernel#gem and Kernel#require
+  #
+
+  def self.runtime
+    @@runtime ||= Runtime.new
+  end
+
+  ##
+  # Set the object to use for Kernel#gem and Kernel#require
+  #
+
+  def self.runtime=(im)
+    @@runtime = im
+  end
+
   class << self
 
     ##
@@ -1134,9 +1150,7 @@ module Kernel
   #   GEM_SKIP=libA:libB ruby -I../libA -I../libB ./mycode.rb
 
   def gem(gem_name, *requirements) # :doc:
-    skip_list = (ENV['GEM_SKIP'] || "").split(/:/)
-    raise Gem::LoadError, "skipping #{gem_name}" if skip_list.include? gem_name
-    Gem.activate(gem_name, *requirements)
+    Gem.runtime.activate_gem gem_name, *requirements
   end
 
   private :gem
@@ -1155,6 +1169,7 @@ def RbConfig.datadir(package_name)
     File.join(Gem::ConfigMap[:datadir], package_name)
 end
 
+require 'rubygems/runtime'
 require 'rubygems/exceptions'
 
 begin

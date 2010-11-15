@@ -28,15 +28,7 @@ module Kernel
   # that file has already been loaded is preserved.
 
   def require(path) # :doc:
-    gem_original_require path
-  rescue LoadError => load_error
-    if load_error.message =~ /#{Regexp.escape path}\z/ and
-       spec = Gem.searcher.find(path) then
-      Gem.activate(spec.name, "= #{spec.version}")
-      gem_original_require path
-    else
-      raise load_error
-    end
+    Gem.runtime.activate_from_path(path)
   end
 
   private :require
