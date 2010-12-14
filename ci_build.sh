@@ -1,7 +1,8 @@
 # You must ensure that rake, hoe, and minitest are already installed in specified RVM interpreter
 export rvm_install_on_use_flag=1
 export rvm_gemset_create_on_use_flag=1
-source $HOME/.rvm/environments/ruby-$1
+echo "Using interpreter $1"
+source "$HOME/.rvm/environments/ruby-$1"
 
 
 echo "----------------------------"
