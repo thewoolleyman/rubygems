@@ -8,7 +8,7 @@ Project.configure do |project|
 
   interpreter = Regexp.new(/RubyGems-(.*)$/i).match(project.name)[1]
   interpreter.gsub!('_','.')
-  project.build_command = "ci_build.sh '#{interpreter}@rubygems'"
+  project.build_command = "./ci_build.sh '#{interpreter}@rubygems'"
   project.scheduler.polling_interval = 5.minutes
 
 end
