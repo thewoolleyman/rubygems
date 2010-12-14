@@ -2,7 +2,7 @@
 export rvm_install_on_use_flag=1
 export rvm_gemset_create_on_use_flag=1
 echo "Using interpreter $1"
-$HOME/.rvm/environments/ruby-$1
+. $HOME/.rvm/environments/ruby-$1
 
 echo "----------------------------"
 echo "Build environment:"
