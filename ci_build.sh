@@ -6,12 +6,12 @@ export rvm_gemset_create_on_use_flag=1
 # TODO: How can you make Hoe's check_extra_deps not use sudo?
 #rake check_extra_deps default
 # install gems manually for now
-gem install -y 'rake' --no-ri --no-rdoc
-gem install -y 'hoe' --no-ri --no-rdoc
-gem install -y 'builder' -v '~> 2.1' --no-ri --no-rdoc
-gem install -y 'hoe-seattlerb' -v '~> 1.2' --no-ri --no-rdoc
-gem install -y 'minitest' -v '~> 1.4' --no-ri --no-rdoc
-gem install -y 'session' -v '~> 2.4' --no-ri --no-rdoc
+gem install 'rake' --no-ri --no-rdoc
+gem install 'hoe' --no-ri --no-rdoc
+gem install 'builder' -v '~> 2.1' --no-ri --no-rdoc
+gem install 'hoe-seattlerb' -v '~> 1.2' --no-ri --no-rdoc
+gem install 'minitest' -v '~> 1.4' --no-ri --no-rdoc
+gem install 'session' -v '~> 2.4' --no-ri --no-rdoc
 
 echo "----------------------------"
 echo "Build environment:"
