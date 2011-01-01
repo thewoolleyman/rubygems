@@ -2,13 +2,23 @@
 require 'socket'
 
 Project.configure do |project|
-  
-  #project.email_notifier.emails = ['rubygems-developers@rubyforge.org'] if Socket.gethostname =~ /cibuilder.pivotallabs.com/
-  project.email_notifier.from = 'devnull+rubygems-ci@pivotallabs.com'
-
+  # To add a build for a new interpreter (from ccrb root):
+  # ./cruise add RubyGems-x_y_z-pxxx -s git -r git://github.com/rubygems/rubygems.git
   interpreter = Regexp.new(/RubyGems-(.*)$/i).match(project.name)[1]
   interpreter.gsub!('_','.')
-  project.build_command = "./ci_build.sh '#{interpreter}@rubygems'"
-  project.scheduler.polling_interval = 5.minutes
 
+  interpreters_with_disabled_notification = [
+    # e.g.: 'RubyGems-1.8.7-p302'
+    ''
+  ]
+  if !interpreters_with_disabled_notification.include?(interpreter) && Socket.gethostname =~ /cibuilder.pivotallabs.com/
+    # enable dev list notification when fully tested
+    # project.email_notifier.emails = ['rubygems-developers@rubyforge.org']
+    project.email_notifier.emails = ['thewoolleyman+rubygems-ci@gmail.com']
+  end
+
+  project.build_command = "./ci_build.sh '#{interpreter}@rubygems'"
+
+  project.email_notifier.from = 'thewoolleyman+rubygems-ci@gmail.com'
+  project.scheduler.polling_interval = 5.minutes
 end
