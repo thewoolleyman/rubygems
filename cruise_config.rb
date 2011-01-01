@@ -7,16 +7,20 @@ Project.configure do |project|
   interpreter = Regexp.new(/RubyGems-(.*)$/i).match(project.name)[1]
   interpreter.gsub!('_','.')
 
-  interpreters_with_disabled_notification = [
-    '1.9.1-p430',
-    '1_9_2-p0'
-  ]
-  if !interpreters_with_disabled_notification.include?(interpreter) && Socket.gethostname =~ /cibuilder.pivotallabs.com/
-    # enable dev list notification when things are stable and all green
-    # project.email_notifier.emails = ['rubygems-developers@rubyforge.org']
-    project.email_notifier.emails = [
-      'thewoolleyman+rubygems-ci@gmail.com'
+  # only send notifications from the official ci box
+  if Socket.gethostname =~ /cibuilder.pivotallabs.com/
+    # explicitly enable dev list notification only for interpreters which should be green
+    interpreters_with_enabled_notification = [
+      '1.8.7-p302'
     ]
+    if interpreters_with_enabled_notification.include?(interpreter)
+      project.email_notifier.emails = ['rubygems-developers@rubyforge.org']
+    end
+
+    # Always notify the following for all interpreters:
+    project.email_notifier.emails.concat([
+      'thewoolleyman+rubygems-ci@gmail.com'
+    ])
   end
 
   project.build_command = "./ci_build.sh '#{interpreter}@rubygems'"
