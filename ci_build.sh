@@ -5,6 +5,7 @@ rvm use $1
 $HOME/.rvm/scripts/rvm
 env
 rvm info
+echo $(__rvm_environment_identifier)
 exit 1
 . "$HOME/.rvm/environments/${GEM_HOME/#*\//}"
 
