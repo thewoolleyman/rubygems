@@ -2,6 +2,7 @@
 export rvm_install_on_use_flag=1
 export rvm_gemset_create_on_use_flag=1
 rvm use $1
+. "$HOME/.rvm/scripts/rvm"
 env
 rvm info
 exit 1
