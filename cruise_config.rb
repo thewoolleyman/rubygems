@@ -23,7 +23,7 @@ Project.configure do |project|
     ])
   end
 
-  project.build_command = "./ci_build.sh '#{interpreter}@rubygems'"
+  project.build_command = "./ci_build.sh '#{interpreter}' 'rubygems'"
 
   project.email_notifier.from = 'thewoolleyman+rubygems-ci@gmail.com'
   project.scheduler.polling_interval = 5.minutes

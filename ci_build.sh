@@ -1,10 +1,12 @@
+interpreter=$1
+gemset=$2
 # You must ensure that rake, hoe, and minitest are already installed in specified RVM interpreter
 export rvm_install_on_use_flag=1
 export rvm_gemset_create_on_use_flag=1
 # hack, how can you dynamically determine which patchlevel rvm picked?
-rvm_use_output=$(rvm use $1)
-rvm use $1
-. "$HOME/.rvm/environments/${rvm_use_output/#*\//}"
+rvm_use_output=$(rvm use $interpreter) # perform rvm use without gemset in a subshell and grab output to find patchlevel
+rvm use $interpreter@$gemset
+. "$HOME/.rvm/environments/${rvm_use_output/#*\//}@$gemset"
 env
 rvm info
 exit 1
