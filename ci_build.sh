@@ -1,13 +1,13 @@
 # You must ensure that rake, hoe, and minitest are already installed in specified RVM interpreter
 export rvm_install_on_use_flag=1
 export rvm_gemset_create_on_use_flag=1
+# hack, how can you dynamically determine which patchlevel rvm picked?
+rvm_use_output=$(rvm use $1)
 rvm use $1
-$HOME/.rvm/scripts/rvm
+. "$HOME/.rvm/environments/${rvm_use_output/#*\//}"
 env
 rvm info
-echo $(__rvm_environment_identifier)
 exit 1
-. "$HOME/.rvm/environments/${GEM_HOME/#*\//}"
 
 # TODO: How can you make Hoe's check_extra_deps not use sudo?
 #rake check_extra_deps default
